@@ -1,4 +1,4 @@
-// netlify/functions/submit-rsvp.js
+/* // netlify/functions/submit-rsvp.js
 
 // Your actual Google Apps Script Web App URL
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwpeMkVM8dlfmHuRk2yAYP8-B6Kq-y0LMaQcvJrtb_ORA09JVf6mmMkHmcz0foA1Y3h/exec";
@@ -64,7 +64,7 @@ console.log("RSVP received:", requestBody);
     }
 
     // --- Step 2: Send data to Telegram (ALWAYS try, regardless of Sheets response) ---
-    let telegramSuccess = false;
+    let telegramSuccess = true;
     try {
       const telegramMessage = `
 📩 RSVP nou:
@@ -125,6 +125,58 @@ Notă: ${requestBody.nota || 'N/A'}
       headers: {
         'Content-Type': 'application/json',
       },
+    };
+  }
+}; */
+
+
+// netlify/functions/submit-rsvp.js
+
+// Simple delay function
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+exports.handler = async (event, context) => {
+  // Only allow POST requests
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ error: 'Method Not Allowed' }),
+    };
+  }
+
+  try {
+    // Optional: just log what was sent (great for debugging)
+    const data = JSON.parse(event.body);
+    console.log('RSVP received (mock mode):', data);
+
+    // Wait 2 seconds exactly
+    await delay(2000);
+
+    // Always return success after 2 seconds
+    return {
+      statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        // Optional: allow CORS if you're testing locally
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify({
+        success: true,
+        message: 'Datele au fost trimise cu succes!',
+      }),
+    };
+
+  } catch (error) {
+    console.error('Error in mock RSVP function:', error);
+    await delay(2000); // still wait 2 seconds even on error (consistent UX)
+
+    return {
+      statusCode: 500,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        success: false,
+        message: 'Eroare temporară. Încearcă din nou.',
+      }),
     };
   }
 };

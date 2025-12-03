@@ -401,9 +401,9 @@ p {
   --tw-font-weight: var(--font-weight-thin);
   font-weight: var(--font-weight-thin);
   span {
-    font-size: var(--text-h2);
+    font-size: var(--text-h3);
     font-family: 'Times New Roman';
-    font-style: oblique !important;
+    font-style: italic !important;
   }
 }
 .info__content {
