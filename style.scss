@@ -1,0 +1,368 @@
+@import 'tailwindcss';
+
+/* ================================ Variables ================================ */
+@theme {
+    /* Colors */
+    --color-primary: #706155;
+    --color-secondary: #646775;
+    --color-tertiary: #fffef7;
+    --color-body: #272624;
+    
+    /* Fonts */
+    --font-lucy: "Lucy Said Ok",Times, serif;
+  --font-runtime: "Runtime", sans-serif;
+  --font-mate: "Mate", serif;
+
+    /* Font Sizes */
+    --text-uber-large: 124px;
+    --text-uber: 80px;
+    --text-h1: 64px;
+    --text-h2: 48px;
+    --text-h3: 36px;
+    --text-h4: 28px;
+    --text-h5: 24px;
+    --text-h6: 20px;
+    --text-md: 18px;
+    --text-base: 16px;
+    --text-sm: 14px;
+
+}
+
+@font-face {
+  font-family: "Lucy Said Ok";
+  src: url("../fonts/lucy-said-ok-personal-use.italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;      
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Runtime";
+  src: url("../fonts/Runtime.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mate";
+  src: url("../fonts/mate.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* ================================ Base styles ================================ */
+
+body {
+    @apply bg-tertiary overflow-x-hidden;
+
+    &.loading {
+        @apply pointer-events-none;
+        .loading-section {
+            @apply flex;
+        }
+    }
+   
+}
+
+section {
+    @apply max-w-screen-sm w-full mx-auto p-5 overflow-x-hidden;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    @apply text-body leading-tight;
+}
+
+p {
+    @apply font-sans font-light;
+}
+
+.btn {
+    @apply text-center py-3 px-8 duration-300 ease-in-out mt-5 font-runtime border border-primary cursor-pointer;
+}
+
+.btn-outlined {
+    @apply bg-none text-primary hover:bg-primary hover:text-tertiary;
+}
+
+.btn-full {
+    @apply bg-primary text-tertiary hover:bg-secondary;
+}
+
+.heading {
+    @apply text-h1 font-lucy font-thin leading-[0.75] relative;
+}
+
+/* ================================ All Styles ================================ */
+
+.loading-section {
+    @apply hidden flex-col items-center justify-center fixed inset-0 gap-5 z-50 bg-body/60;
+}
+
+.loading-section__icon {
+    @apply h-32 w-32 animate-spin;
+}
+
+.loading-section__content {
+    @apply text-h5 text-tertiary;
+}
+
+
+
+/* Hero Section */
+
+.hero {
+    @apply bg-center bg-no-repeat bg-cover relative text-tertiary flex flex-col justify-center items-center h-[95dvh];
+    background-image: url(../media/hero.webp);  
+
+    &::before {
+        @apply content-[''] absolute bottom-0 left-0 w-full h-1/2;
+        background: linear-gradient(to top, #fffef7, #fffef700);
+    }
+}
+
+.hero__container {
+    @apply relative z-2 flex flex-col items-center justify-center;
+}
+
+.hero__name {
+    @apply font-lucy font-thin text-center text-body text-uber leading-[0.9];
+
+    span {
+        @apply text-h1;
+        font-family: 'Times New Roman';
+        font-style: oblique !important;
+    }
+}
+
+.hero__date-wrap {
+    @apply flex justify-center gap-4 items-center w-full mt-5;
+}
+
+.hero__vertical-line {
+    @apply bg-body h-[2px] w-full;
+}
+
+.hero__date {
+    @apply text-uber text-body font-runtime leading-[0.9];
+}
+
+
+
+/* Info Section */
+
+.info__heading {
+    @apply text-h1 font-lucy text-center font-thin leading-[0.75] mt-14 relative;
+
+    span {
+        @apply text-h3;
+        font-family: 'Times New Roman';
+        font-style: italic !important;
+    }
+}
+
+.info__content {
+    @apply text-secondary text-center text-h6 pt-5;
+}
+
+.info__calendar {
+    @apply w-full  mx-auto max-w-96  mt-5;
+}
+
+.info__countdown-wrap {
+    @apply pt-8;
+}
+
+.info__countdown {
+    @apply flex flex-col items-center;
+}
+
+.info__countdown-item {
+    @apply font-runtime text-h2 leading-tight relative text-body; 
+}
+
+.info__countdown-item--seconds {
+    @apply flex;
+}
+
+.info__countdown-item--seconds-number {
+    @apply w-[70px];
+}
+
+/* Program */
+
+.program {
+    @apply pt-12;
+}
+
+.program__heading {
+    @apply text-h1 font-lucy font-thin w-full text-center leading-[0.75];
+}
+
+.program__card {
+    @apply py-5 flex flex-col items-center last:mt-5;
+}
+
+.program__card-image {
+    @apply w-32 h-auto;
+}
+
+.program__card-heading {
+    @apply text-h4 font-runtime text-center mt-5;
+}
+
+.program__card-info-wrap-outer {
+    @apply grid grid-cols-2 justify-evenly items-center mt-5 gap-[1px] bg-primary;
+}
+
+.program__card-info-wrap {
+    @apply w-full h-full flex items-center justify-center p-2 bg-tertiary;
+}
+
+.program__card-info-icon {
+    @apply w-10 h-10;
+}
+
+.program__card-info {
+    @apply text-h6 text-center w-full;
+}
+
+.program__card-button {
+    @apply w-[70%] max-w-80;
+}
+
+.program__card-info--big {
+    @apply text-h4 font-thin font-runtime;
+}
+
+.program__card-info--zoom {
+    @apply font-runtime text-left;
+
+    span {
+        @apply font-lucy font-thin text-h4;
+    }
+}
+
+.program__card-info-wrap-zoom {
+    @apply flex items-center gap-4 mt-10;
+}
+
+/* Important */
+
+.important__heading {
+    @apply text-center;
+}
+
+.important__card {
+    @apply relative flex flex-col items-center p-5 mt-10;
+
+    &::before, &::after {
+        @apply content-[''] absolute top-0 left-0 w-full h-full border border-secondary rotate-[2deg];
+    }
+
+    &::after {
+        @apply -rotate-[2deg];
+    }
+}
+
+.important__card-content {
+    @apply text-center pt-3 text-md z-10;
+}
+
+.important__card-link {
+    @apply underline decoration-secondary underline-offset-2;
+}
+
+
+/* Form Section */
+.form__heading {
+  @apply text-center font-runtime text-h3 leading-none mb-8;
+}
+
+.form__icon {
+    @apply w-60 mx-auto mt-12;
+}
+
+.form__form {
+  @apply max-w-lg mx-auto border border-primary p-6 space-y-4 mt-10;
+}
+
+.form__group {
+  @apply flex flex-col space-y-2;
+}
+
+.form__label {
+  @apply text-body text-h6;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.form__input, .form__textarea {
+  @apply border border-primary px-3 py-2 focus:outline-none focus:ring-1 focus:ring-body text-body font-mate;
+}
+
+.form__radio-label,
+.form__checkbox-label {
+  @apply flex flex-row-reverse justify-end gap-2 items-center space-x-2 font-mate text-body text-h6 cursor-pointer;
+}
+
+
+.form__checkbox {
+  @apply hidden;
+}
+
+.form__checkbox + span {
+  @apply relative w-5 h-5 border border-primary cursor-pointer;
+}
+
+
+.form__checkbox:checked + span {
+
+  &::after {
+    content: '';
+    @apply absolute left-[1px] bottom-[1px] w-6 h-6 bg-contain bg-no-repeat bg-center;
+    background-image: url('../media/check.svg');
+  }
+}
+
+.form__radio {
+  @apply hidden;
+
+    + span {
+        @apply relative h-5 w-5 flex items-center justify-center border border-primary rounded-full;
+    }
+
+    &:checked + span::after {
+        @apply content-[''] w-3 h-3 bg-primary rounded-full;
+    }
+}
+
+.form__textarea {
+    @apply placeholder:text-primary placeholder:font-mate;
+}
+
+.form_submit-wrap {
+    @apply flex items-center justify-center w-full;
+}
+
+/* For Chrome, Safari, Edge, and Opera */
+.form__input-number::-webkit-outer-spin-button,
+.form__input-number::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+.form__input-number[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* General property for other browsers (optional, but good for consistency) */
+.form__input-number[type=number] {
+  appearance: textfield;
+}
+
+.form__success {
+    @apply text-center text-h4 text-body font-runtime;
+}
